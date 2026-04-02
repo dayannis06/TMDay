@@ -1,0 +1,6 @@
+@TMDay.API_HostAddress = http://localhost:5206
+
+GET {{TMDay.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,250 @@
+{
+  "TestCases": [
+    {
+      "TcId": 1,
+      "TcName": "User Authentication Login",
+      "TcEpic": "Authentication System",
+      "TcApp": "TMDay.API",
+      "TcComponent": "Authentication",
+      "TcStory": "As a user, I want to login with my credentials",
+      "TcAssigned": "John Lenon",
+      "CreatedAt": "2026-03-31T00:00:00Z",
+      "UpdatedAt": null,
+      "TestScenarios": [
+        {
+          "Id": 1,
+          "TcId": 1,
+          "Name": "Successful login with valid credentials",
+          "PreRequisites": "User account exists in the system",
+          "Data": "username: admin@example.com, password: SecurePass123",
+          "Steps": "1. Navigate to login page\n2. Enter valid email\n3. Enter valid password\n4. Click login button",
+          "ExpectedResult": "User successfully authenticated and redirected to dashboard",
+          "ActualResult": "User is authenticated and redirected to dashboard",
+          "Status": "Approved",
+          "Type": "Functional"
+        },
+        {
+          "Id": 2,
+          "TcId": 1,
+          "Name": "Login with invalid password",
+          "PreRequisites": "User account exists in the system",
+          "Data": "username: admin@example.com, password: WrongPassword123",
+          "Steps": "1. Navigate to login page\n2. Enter valid email\n3. Enter invalid password\n4. Click login button",
+          "ExpectedResult": "Error message displayed: \u0027Invalid credentials\u0027",
+          "ActualResult": "Error message displayed: \u0027Invalid credentials\u0027",
+          "Status": "Failed",
+          "Type": "Functional"
+        },
+        {
+          "Id": 3,
+          "TcId": 1,
+          "Name": "Login with non-existent email",
+          "PreRequisites": "Database connection is active",
+          "Data": "username: nonexistent@example.com, password: AnyPassword123",
+          "Steps": "1. Navigate to login page\n2. Enter non-existent email\n3. Enter any password\n4. Click login button",
+          "ExpectedResult": "Error message displayed: \u0027User not found\u0027",
+          "ActualResult": "Error message displayed: \u0027User not found\u0027",
+          "Status": "Failed",
+          "Type": "Functional"
+        }
+      ]
+    },
+    {
+      "TcId": 2,
+      "TcName": "Product Search Functionality",
+      "TcEpic": "E-commerce Features",
+      "TcApp": "TMDay.API",
+      "TcComponent": "Search Engine",
+      "TcStory": "As a customer, I want to search for products by name and category",
+      "TcAssigned": "Jane Smith",
+      "CreatedAt": "2026-03-31T00:00:00Z",
+      "UpdatedAt": null,
+      "TestScenarios": [
+        {
+          "Id": 4,
+          "TcId": 2,
+          "Name": "Search product by exact name",
+          "PreRequisites": "Database contains products with sample data",
+          "Data": "searchQuery: \u0027Laptop\u0027",
+          "Steps": "1. Open search bar\n2. Enter \u0027Laptop\u0027\n3. Press enter or click search",
+          "ExpectedResult": "All products with \u0027Laptop\u0027 in the name are displayed",
+          "ActualResult": "All products with \u0027Laptop\u0027 in the name are displayed",
+          "Status": "Approved",
+          "Type": "Functional"
+        },
+        {
+          "Id": 5,
+          "TcId": 2,
+          "Name": "Search with empty query",
+          "PreRequisites": "Search functionality is loaded",
+          "Data": "searchQuery: \u0027\u0027",
+          "Steps": "1. Open search bar\n2. Leave search field empty\n3. Click search button",
+          "ExpectedResult": "Either show all products or display validation message",
+          "ActualResult": "Validation message displayed: \u0027Please enter a search term\u0027",
+          "Status": "Blocked",
+          "Type": "Functional"
+        },
+        {
+          "Id": 6,
+          "TcId": 2,
+          "Name": "Search with special characters",
+          "PreRequisites": "Database connection is active",
+          "Data": "searchQuery: \u0027@#$%^\u0026*()\u0027",
+          "Steps": "1. Open search bar\n2. Enter special characters\n3. Click search button",
+          "ExpectedResult": "No results found or error message is displayed",
+          "ActualResult": "No results found message displayed",
+          "Status": "Failed",
+          "Type": "Functional"
+        },
+        {
+          "Id": 7,
+          "TcId": 2,
+          "Name": "Search with partial name",
+          "PreRequisites": "Products exist with similar names",
+          "Data": "searchQuery: \u0027Lap\u0027",
+          "Steps": "1. Open search bar\n2. Enter \u0027Lap\u0027\n3. Click search button",
+          "ExpectedResult": "All products containing \u0027Lap\u0027 in the name are displayed",
+          "ActualResult": "All products containing \u0027Lap\u0027 in the name are displayed",
+          "Status": "Approved",
+          "Type": "Functional"
+        }
+      ]
+    },
+    {
+      "TcId": 3,
+      "TcName": "Payment Processing",
+      "TcEpic": "Payment System",
+      "TcApp": "TMDay.API",
+      "TcComponent": "Payment Gateway",
+      "TcStory": "As a customer, I want to complete my purchase with multiple payment options",
+      "TcAssigned": "Michael Johnson",
+      "CreatedAt": "2026-03-31T00:00:00Z",
+      "UpdatedAt": null,
+      "TestScenarios": [
+        {
+          "Id": 8,
+          "TcId": 3,
+          "Name": "Successful payment with credit card",
+          "PreRequisites": "Valid credit card in system, Payment gateway is active",
+          "Data": "cardNumber: 4532015112830366, expiry: 12/25, cvv: 123, amount: $99.99",
+          "Steps": "1. Proceed to checkout\n2. Select credit card payment\n3. Enter card details\n4. Click pay button",
+          "ExpectedResult": "Payment processed successfully and order confirmation is displayed",
+          "ActualResult": "Payment processed successfully and order confirmation is displayed",
+          "Status": "Approved",
+          "Type": "Functional"
+        },
+        {
+          "Id": 9,
+          "TcId": 3,
+          "Name": "Payment with expired card",
+          "PreRequisites": "Expired credit card number available",
+          "Data": "cardNumber: 4532015112830366, expiry: 01/20, cvv: 123, amount: $99.99",
+          "Steps": "1. Proceed to checkout\n2. Select credit card payment\n3. Enter expired card details\n4. Click pay button",
+          "ExpectedResult": "Payment declined with error message: \u0027Card has expired\u0027",
+          "ActualResult": "Payment declined with error message: \u0027Card has expired\u0027",
+          "Status": "Failed",
+          "Type": "Functional"
+        },
+        {
+          "Id": 10,
+          "TcId": 3,
+          "Name": "Payment with insufficient funds",
+          "PreRequisites": "Card with insufficient balance",
+          "Data": "cardNumber: 4532015112830366, balance: $10.00, amount: $99.99",
+          "Steps": "1. Proceed to checkout\n2. Enter card with low balance\n3. Click pay button",
+          "ExpectedResult": "Payment declined with error message: \u0027Insufficient funds\u0027",
+          "ActualResult": "Payment declined with error message: \u0027Insufficient funds\u0027",
+          "Status": "Failed",
+          "Type": "Functional"
+        }
+      ]
+    },
+    {
+      "TcId": 4,
+      "TcName": "Login Test",
+      "TcEpic": "User Authentication",
+      "TcApp": "WebApp",
+      "TcComponent": "Login Page",
+      "TcStory": "Log in using facebook",
+      "TcAssigned": "Amalia Jonson",
+      "CreatedAt": "2026-03-31T00:00:00Z",
+      "UpdatedAt": null,
+      "TestScenarios": [
+        {
+          "Id": 1,
+          "TcId": 4,
+          "Name": "Valid Login",
+          "PreRequisites": "User account exists",
+          "Data": "username: user1, password: pass123",
+          "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
+          "ExpectedResult": "User is redirected to the dashboard.",
+          "ActualResult": "",
+          "Status": "ToDo",
+          "Type": "Functional"
+        }
+      ]
+    },
+    {
+      "TcId": 5,
+      "TcName": "Login Test",
+      "TcEpic": "User Authentication",
+      "TcApp": "WebApp",
+      "TcComponent": "Login Page",
+      "TcStory": "As a user, I want to log in",
+      "TcAssigned": "John Jackson",
+      "CreatedAt": "2026-03-31T00:00:00Z",
+      "UpdatedAt": null,
+      "TestScenarios": [
+        {
+          "Id": 1,
+          "TcId": 5,
+          "Name": "Valid Login",
+          "PreRequisites": "User account exists",
+          "Data": "username: user1, password: pass123",
+          "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
+          "ExpectedResult": "User is redirected to the dashboard.",
+          "ActualResult": "",
+          "Status": "ToDo",
+          "Type": "Functional"
+        },
+        {
+          "Id": 2,
+          "TcId": 5,
+          "Name": "Valid Login",
+          "PreRequisites": "User account exists",
+          "Data": "username: user1, password: pass123",
+          "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
+          "ExpectedResult": "User is redirected to the dashboard.",
+          "ActualResult": "",
+          "Status": "ToDo",
+          "Type": "Functional"
+        }
+      ]
+    },
+    {
+      "TcId": 6,
+      "TcName": "Login Test",
+      "TcEpic": "User Authentication",
+      "TcApp": "WebApp",
+      "TcComponent": "Login Page",
+      "TcStory": "As a user, I want to log in",
+      "TcAssigned": "John Doe",
+      "CreatedAt": "2026-04-01T02:41:41.249875Z",
+      "UpdatedAt": null,
+      "TestScenarios": [
+        {
+          "Id": 1,
+          "TcId": 6,
+          "Name": "Valid Login",
+          "PreRequisites": "User account exists",
+          "Data": "username: user1, password: pass123",
+          "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
+          "ExpectedResult": "User is redirected to the dashboard.",
+          "ActualResult": "",
+          "Status": "InProgress",
+          "Type": "Functional"
+        }
+      ]
+    }
+  ]
+}

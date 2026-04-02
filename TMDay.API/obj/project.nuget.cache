@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "FRCBgoZHTzk=",
+  "success": true,
+  "projectFilePath": "/Users/dduarte/Projects/CSharp/TMDay/TMDay.API/TMDay.API.csproj",
+  "expectedPackageFiles": [
+    "/Users/dduarte/.nuget/packages/microsoft.aspnetcore.openapi/10.0.3/microsoft.aspnetcore.openapi.10.0.3.nupkg.sha512",
+    "/Users/dduarte/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
