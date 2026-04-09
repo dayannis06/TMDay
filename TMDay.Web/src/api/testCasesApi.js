@@ -43,3 +43,36 @@ export const createTestScenario = (testCaseId, payload) =>
     },
     body: JSON.stringify(payload),
   })
+
+export const updateTestScenario = (testCaseId, scenarioId, payload) =>
+  request(`/testcase/${testCaseId}/scenario/${scenarioId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+
+export const deleteTestScenario = (testCaseId, scenarioId) =>
+  request(`/testcase/${testCaseId}/scenario/${scenarioId}`, {
+    method: 'DELETE',
+  })
+
+export const getTestCaseById = (id) => request(`/testcase/${id}`)
+
+export const getTestCaseProgress = (id) => request(`/testcase/${id}/progress`)
+
+export const updateTestCase = (id, payload) =>
+  request(`/testcase/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+
+export const deleteTestCase = (id) =>
+  request(`/testcase/${id}`, {
+    method: 'DELETE',
+  })
+

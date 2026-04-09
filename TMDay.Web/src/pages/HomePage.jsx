@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { searchTestCasesByName } from '../api/testCasesApi'
+import { searchTestCasesByName, getTestCaseProgress } from '../api/testCasesApi'
 
-function HomePage() {
+function HomePage({ onSelectTestCase }) {
   const [testCases, setTestCases] = useState([])
+  const [progressMap, setProgressMap] = useState({})
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
@@ -13,10 +14,21 @@ function HomePage() {
 
     try {
       const result = await searchTestCasesByName(filter)
-      setTestCases(Array.isArray(result) ? result : [])
+      const list = Array.isArray(result) ? result : []
+      setTestCases(list)
+
+      const progressEntries = await Promise.all(
+        list.map((tc) =>
+          getTestCaseProgress(tc.tcId)
+            .then((data) => [tc.tcId, Array.isArray(data) ? data : []])
+            .catch(() => [tc.tcId, []])
+        )
+      )
+      setProgressMap(Object.fromEntries(progressEntries))
     } catch (requestError) {
       setError(requestError.message)
       setTestCases([])
+      setProgressMap({})
     } finally {
       setLoading(false)
     }
@@ -58,10 +70,7 @@ function HomePage() {
             aria-label="Search by test case name"
           />
         </div>
-        <button type="button" onClick={() => fetchTestCases(search)}>
-          <span className="button-icon" aria-hidden="true">🔄</span>
-          Refresh
-        </button>
+
       </section>
 
       {loading && <p className="status">Loading test cases...</p>}
@@ -81,28 +90,33 @@ function HomePage() {
               <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Epic</th>
                 <th>App</th>
-                <th>Component</th>
                 <th>Assigned</th>
                 <th>Created</th>
-                <th># Scenarios</th>
+                <th>Progress</th>
               </tr>
             </thead>
             <tbody>
               {testCases.map((testCase) => (
-                <tr key={testCase.tcId}>
+                <tr
+                  key={testCase.tcId}
+                  className="clickable-row"
+                  onClick={() => onSelectTestCase(testCase.tcId)}
+                >
                   <td>{testCase.tcId}</td>
                   <td>{testCase.tcName || '-'}</td>
-                  <td>{testCase.tcEpic || '-'}</td>
                   <td>{testCase.tcApp || '-'}</td>
-                  <td>{testCase.tcComponent || '-'}</td>
                   <td>{testCase.tcAssigned || '-'}</td>
                   <td>{formatDate(testCase.createdAt)}</td>
                   <td>
-                    {Array.isArray(testCase.testScenarios)
-                      ? testCase.testScenarios.length
-                      : 0}
+                    <div className="progress-badges">
+                      {(progressMap[testCase.tcId] ?? []).map((item) => (
+                        <span key={item.state} className={`progress-badge progress-badge--${item.state.toLowerCase()}`}>
+                          {item.state} {item.count} ({item.percentage}%)
+                        </span>
+                      ))}
+                      {(progressMap[testCase.tcId] ?? []).length === 0 && '-'}
+                    </div>
                   </td>
                 </tr>
               ))}

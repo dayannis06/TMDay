@@ -93,7 +93,7 @@
           "Steps": "1. Open search bar\n2. Enter special characters\n3. Click search button",
           "ExpectedResult": "No results found or error message is displayed",
           "ActualResult": "No results found message displayed",
-          "Status": "Failed",
+          "Status": "Approved",
           "Type": "Functional"
         },
         {
@@ -161,13 +161,13 @@
     },
     {
       "TcId": 4,
-      "TcName": "Login Test",
+      "TcName": "Login Test Update",
       "TcEpic": "User Authentication",
       "TcApp": "WebApp",
       "TcComponent": "Login Page",
-      "TcStory": "Log in using facebook",
+      "TcStory": "Log in using facebook account ",
       "TcAssigned": "Amalia Jonson",
-      "CreatedAt": "2026-03-31T00:00:00Z",
+      "CreatedAt": "2026-04-07T03:56:37.198582Z",
       "UpdatedAt": null,
       "TestScenarios": [
         {
@@ -181,30 +181,42 @@
           "ActualResult": "",
           "Status": "ToDo",
           "Type": "Functional"
+        },
+        {
+          "Id": 2,
+          "TcId": 4,
+          "Name": "Test Add Scenario",
+          "PreRequisites": "Create test case",
+          "Data": "NA",
+          "Steps": "Fill all input fields",
+          "ExpectedResult": "The test scenarios is added successfully",
+          "ActualResult": "?",
+          "Status": "InProgress",
+          "Type": "Regression"
         }
       ]
     },
     {
       "TcId": 5,
-      "TcName": "Login Test",
+      "TcName": "Change password to block user",
       "TcEpic": "User Authentication",
       "TcApp": "WebApp",
       "TcComponent": "Login Page",
       "TcStory": "As a user, I want to log in",
       "TcAssigned": "John Jackson",
-      "CreatedAt": "2026-03-31T00:00:00Z",
+      "CreatedAt": "2026-04-05T20:42:51.772069Z",
       "UpdatedAt": null,
       "TestScenarios": [
         {
           "Id": 1,
           "TcId": 5,
-          "Name": "Valid Login",
-          "PreRequisites": "User account exists",
+          "Name": "Valid Login with user blocked",
+          "PreRequisites": "User account block",
           "Data": "username: user1, password: pass123",
           "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
-          "ExpectedResult": "User is redirected to the dashboard.",
-          "ActualResult": "",
-          "Status": "ToDo",
+          "ExpectedResult": "User can\u2019t log in",
+          "ActualResult": "ok",
+          "Status": "Approved",
           "Type": "Functional"
         },
         {
@@ -215,8 +227,8 @@
           "Data": "username: user1, password: pass123",
           "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
           "ExpectedResult": "User is redirected to the dashboard.",
-          "ActualResult": "",
-          "Status": "ToDo",
+          "ActualResult": "OK5",
+          "Status": "InProgress",
           "Type": "Functional"
         }
       ]
@@ -240,8 +252,20 @@
           "Data": "username: user1, password: pass123",
           "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
           "ExpectedResult": "User is redirected to the dashboard.",
-          "ActualResult": "",
-          "Status": "InProgress",
+          "ActualResult": "NA",
+          "Status": "Canceled",
+          "Type": "Functional"
+        },
+        {
+          "Id": 2,
+          "TcId": 6,
+          "Name": "Login iOS phone",
+          "PreRequisites": "Xcode installed",
+          "Data": "NA",
+          "Steps": "Access the login screens and validate UI elements and functionality.",
+          "ExpectedResult": "UI elements are displayed in accordance with the mockup design.",
+          "ActualResult": "NA",
+          "Status": "ToDo",
           "Type": "Functional"
         }
       ]

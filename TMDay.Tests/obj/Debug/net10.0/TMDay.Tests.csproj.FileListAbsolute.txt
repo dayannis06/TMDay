@@ -421,3 +421,4 @@
 /Users/dduarte/Projects/CSharp/TMDay/TMDay.Tests/obj/Debug/net10.0/TMDay.Tests.pdb
 /Users/dduarte/Projects/CSharp/TMDay/TMDay.Tests/obj/Debug/net10.0/TMDay.Tests.genruntimeconfig.cache
 /Users/dduarte/Projects/CSharp/TMDay/TMDay.Tests/obj/Debug/net10.0/ref/TMDay.Tests.dll
+/Users/dduarte/Projects/CSharp/TMDay/TMDay.Tests/obj/Debug/net10.0/TMDay.Tests.sourcelink.json

@@ -32,3 +32,4 @@
 /Users/dduarte/Projects/CSharp/TMDay/TMDay.API/obj/Debug/net10.0/TMDay.API.genruntimeconfig.cache
 /Users/dduarte/Projects/CSharp/TMDay/TMDay.API/obj/Debug/net10.0/ref/TMDay.API.dll
 /Users/dduarte/Projects/CSharp/TMDay/TMDay.API/bin/Debug/net10.0/Resources/testdata.json
+/Users/dduarte/Projects/CSharp/TMDay/TMDay.API/obj/Debug/net10.0/TMDay.API.sourcelink.json

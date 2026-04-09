@@ -11,6 +11,9 @@
   border-radius: 12px;
   padding: 18px;
   box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .home-header h1 {
@@ -20,7 +23,7 @@
 }
 
 .home-header p {
-  margin-top: 8px;
+  margin: 0;
   color: var(--text);
 }
 
@@ -131,8 +134,96 @@
 }
 
 .form-section h2 {
-  margin: 0 0 12px;
+  margin: 0 0 4px;
   font-size: 20px;
+}
+
+.section-subtitle {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.progress-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.progress-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.progress-badge--approved {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: color-mix(in srgb, var(--success) 30%, var(--success-bg));
+}
+
+.progress-badge--failed {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 30%, var(--danger-bg));
+}
+
+.progress-badge--inprogress {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+.progress-badge--todo {
+  background: color-mix(in srgb, var(--border) 40%, var(--surface));
+  color: var(--text-h);
+  border-color: var(--border);
+}
+
+.section-toggle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0;
+}
+
+.section-toggle-header h3 {
+  margin: 0;
+}
+
+.toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent-border);
+  background-color: var(--accent-bg);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.toggle-btn:hover {
+  filter: brightness(1.05);
+}
+
+.form-section:has(.section-toggle-header) .form-grid {
+  margin-top: 16px;
+}
+
+.section-toggle-header + .status,
+.section-toggle-header + .table-wrapper {
+  margin-top: 12px;
 }
 
 .form-grid {
@@ -191,6 +282,12 @@
   color: var(--text-h);
   cursor: pointer;
   font-weight: 600;
+}
+
+.form-actions .danger-btn {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 35%, var(--border));
+  background: color-mix(in srgb, var(--danger-bg) 35%, var(--surface));
 }
 
 .status-success {
@@ -258,6 +355,47 @@ tbody tr:hover {
 
 tbody tr:last-child td {
   border-bottom: none;
+}
+
+tbody tr.clickable-row {
+  cursor: pointer;
+}
+
+tbody tr.selected-row {
+  background: color-mix(in srgb, var(--accent-bg) 75%, var(--surface));
+}
+
+.icon-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: filter 0.15s ease, border-color 0.15s ease;
+}
+
+.icon-action-btn:hover {
+  filter: brightness(0.97);
+}
+
+.icon-action-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.icon-action-btn.danger {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 40%, var(--border));
+  background: color-mix(in srgb, var(--danger-bg) 35%, var(--surface));
+}
+
+.form-grid .section-subtitle {
+  grid-column: 1 / -1;
+  margin: 2px 0 4px;
 }
 
 @media (max-width: 768px) {

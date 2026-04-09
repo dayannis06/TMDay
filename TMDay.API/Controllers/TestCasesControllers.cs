@@ -1,8 +1,7 @@
-using System.Text.Json;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TMDay.API.Models;
-using System.Text.Json.Serialization;
+using TMDay.API.Services;
 
 namespace TMDay.API.Controllers
 {
@@ -73,7 +72,7 @@ namespace TMDay.API.Controllers
             testCase.TcComponent = updatedTestCase.TcComponent;
             testCase.TcStory = updatedTestCase.TcStory;
             testCase.TcAssigned = updatedTestCase.TcAssigned;
-            testCase.CreatedAt = DateTime.UtcNow;
+            testCase.UpdatedAt = DateTime.UtcNow;
 
             SaveTestCasesToFile();
 
