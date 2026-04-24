@@ -4,12 +4,12 @@
       "TcId": 1,
       "TcName": "User Authentication Login",
       "TcEpic": "Authentication System",
-      "TcApp": "TMDay.API",
+      "TcApp": "iOS_App",
       "TcComponent": "Authentication",
-      "TcStory": "As a user, I want to login with my credentials",
+      "TcStory": "TDAY-3450",
       "TcAssigned": "John Lenon",
       "CreatedAt": "2026-03-31T00:00:00Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-24T02:40:51.590453Z",
       "TestScenarios": [
         {
           "Id": 1,
@@ -46,6 +46,18 @@
           "ActualResult": "Error message displayed: \u0027User not found\u0027",
           "Status": "Failed",
           "Type": "Functional"
+        },
+        {
+          "Id": 4,
+          "TcId": 1,
+          "Name": "riky dd",
+          "PreRequisites": "xcvb",
+          "Data": " sdfgh",
+          "Steps": "dfghnj",
+          "ExpectedResult": "sdfgh",
+          "ActualResult": "dfgh",
+          "Status": "Approved",
+          "Type": "Regression"
         }
       ]
     },
@@ -53,12 +65,12 @@
       "TcId": 2,
       "TcName": "Product Search Functionality",
       "TcEpic": "E-commerce Features",
-      "TcApp": "TMDay.API",
+      "TcApp": "iOS_APP",
       "TcComponent": "Search Engine",
       "TcStory": "As a customer, I want to search for products by name and category",
       "TcAssigned": "Jane Smith",
       "CreatedAt": "2026-03-31T00:00:00Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-24T02:40:19.072324Z",
       "TestScenarios": [
         {
           "Id": 4,
@@ -89,7 +101,7 @@
           "TcId": 2,
           "Name": "Search with special characters",
           "PreRequisites": "Database connection is active",
-          "Data": "searchQuery: \u0027@#$%^\u0026*()\u0027",
+          "Data": "searchQuery: \u0027@#$%^\u0026*()\u0027/?",
           "Steps": "1. Open search bar\n2. Enter special characters\n3. Click search button",
           "ExpectedResult": "No results found or error message is displayed",
           "ActualResult": "No results found message displayed",
@@ -114,12 +126,12 @@
       "TcId": 3,
       "TcName": "Payment Processing",
       "TcEpic": "Payment System",
-      "TcApp": "TMDay.API",
+      "TcApp": "Android_APP",
       "TcComponent": "Payment Gateway",
       "TcStory": "As a customer, I want to complete my purchase with multiple payment options",
       "TcAssigned": "Michael Johnson",
       "CreatedAt": "2026-03-31T00:00:00Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-24T02:40:30.962515Z",
       "TestScenarios": [
         {
           "Id": 8,
@@ -142,7 +154,7 @@
           "Steps": "1. Proceed to checkout\n2. Select credit card payment\n3. Enter expired card details\n4. Click pay button",
           "ExpectedResult": "Payment declined with error message: \u0027Card has expired\u0027",
           "ActualResult": "Payment declined with error message: \u0027Card has expired\u0027",
-          "Status": "Failed",
+          "Status": "Approved",
           "Type": "Functional"
         },
         {
@@ -154,7 +166,7 @@
           "Steps": "1. Proceed to checkout\n2. Enter card with low balance\n3. Click pay button",
           "ExpectedResult": "Payment declined with error message: \u0027Insufficient funds\u0027",
           "ActualResult": "Payment declined with error message: \u0027Insufficient funds\u0027",
-          "Status": "Failed",
+          "Status": "Approved",
           "Type": "Functional"
         }
       ]
@@ -168,7 +180,7 @@
       "TcStory": "Log in using facebook account ",
       "TcAssigned": "Amalia Jonson",
       "CreatedAt": "2026-04-07T03:56:37.198582Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-22T03:33:17.257864Z",
       "TestScenarios": [
         {
           "Id": 1,
@@ -192,7 +204,7 @@
           "ExpectedResult": "The test scenarios is added successfully",
           "ActualResult": "?",
           "Status": "InProgress",
-          "Type": "Regression"
+          "Type": "Sanity"
         }
       ]
     },
@@ -205,7 +217,7 @@
       "TcStory": "As a user, I want to log in",
       "TcAssigned": "John Jackson",
       "CreatedAt": "2026-04-05T20:42:51.772069Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-24T02:38:38.201076Z",
       "TestScenarios": [
         {
           "Id": 1,
@@ -222,50 +234,13 @@
         {
           "Id": 2,
           "TcId": 5,
-          "Name": "Valid Login",
+          "Name": "Valid Login with forgot password",
           "PreRequisites": "User account exists",
           "Data": "username: user1, password: pass123",
           "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
           "ExpectedResult": "User is redirected to the dashboard.",
           "ActualResult": "OK5",
           "Status": "InProgress",
-          "Type": "Functional"
-        }
-      ]
-    },
-    {
-      "TcId": 6,
-      "TcName": "Login Test",
-      "TcEpic": "User Authentication",
-      "TcApp": "WebApp",
-      "TcComponent": "Login Page",
-      "TcStory": "As a user, I want to log in",
-      "TcAssigned": "John Doe",
-      "CreatedAt": "2026-04-01T02:41:41.249875Z",
-      "UpdatedAt": null,
-      "TestScenarios": [
-        {
-          "Id": 1,
-          "TcId": 6,
-          "Name": "Valid Login",
-          "PreRequisites": "User account exists",
-          "Data": "username: user1, password: pass123",
-          "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
-          "ExpectedResult": "User is redirected to the dashboard.",
-          "ActualResult": "NA",
-          "Status": "Canceled",
-          "Type": "Functional"
-        },
-        {
-          "Id": 2,
-          "TcId": 6,
-          "Name": "Login iOS phone",
-          "PreRequisites": "Xcode installed",
-          "Data": "NA",
-          "Steps": "Access the login screens and validate UI elements and functionality.",
-          "ExpectedResult": "UI elements are displayed in accordance with the mockup design.",
-          "ActualResult": "NA",
-          "Status": "ToDo",
           "Type": "Functional"
         }
       ]

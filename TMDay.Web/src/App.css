@@ -148,17 +148,30 @@
 .progress-badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
 }
 
 .progress-badge {
-  display: inline-block;
-  padding: 2px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
   border-radius: 999px;
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   border: 1px solid transparent;
+  letter-spacing: 0.01em;
+}
+
+.progress-badge::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
 }
 
 .progress-badge--approved {
@@ -182,6 +195,18 @@
 .progress-badge--todo {
   background: color-mix(in srgb, var(--border) 40%, var(--surface));
   color: var(--text-h);
+  border-color: var(--border);
+}
+
+.progress-badge--blocked {
+  background: color-mix(in srgb, var(--warning) 12%, var(--surface));
+  color: var(--warning);
+  border-color: color-mix(in srgb, var(--warning) 35%, var(--surface));
+}
+
+.progress-badge--canceled {
+  background: color-mix(in srgb, var(--text) 8%, var(--surface));
+  color: var(--text);
   border-color: var(--border);
 }
 
@@ -310,6 +335,89 @@
   border: 1px solid color-mix(in srgb, var(--danger) 35%, var(--danger-bg));
 }
 
+/* Toast notifications */
+.toast-container {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 420px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  animation: toast-slide-in 0.3s ease forwards;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.toast.toast-exit {
+  animation: toast-slide-out 0.25s ease forwards;
+}
+
+.toast-success {
+  color: var(--success);
+  background: var(--success-bg);
+  border: 1px solid color-mix(in srgb, var(--success) 35%, var(--success-bg));
+}
+
+.toast-error {
+  color: var(--danger);
+  background: var(--danger-bg);
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, var(--danger-bg));
+}
+
+.toast-message {
+  flex: 1;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 6px;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.toast-close:hover {
+  opacity: 1;
+}
+
+@keyframes toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toast-slide-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
 .table-wrapper {
   margin-top: 16px;
   overflow-x: auto;
@@ -393,9 +501,48 @@ tbody tr.selected-row {
   background: color-mix(in srgb, var(--danger-bg) 35%, var(--surface));
 }
 
+.icon-action-btn.accent {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  background: color-mix(in srgb, var(--accent-bg) 35%, var(--surface));
+}
+
+.action-group {
+  display: inline-flex;
+  gap: 6px;
+}
+
 .form-grid .section-subtitle {
   grid-column: 1 / -1;
   margin: 2px 0 4px;
+}
+
+.metadata-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 4px 0 8px;
+}
+
+.metadata-item {
+  font-size: 13px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--border) 25%, var(--surface));
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.section-header-row h2 {
+  margin: 0;
 }
 
 @media (max-width: 768px) {

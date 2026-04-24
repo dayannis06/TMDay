@@ -6,10 +6,10 @@
       "TcEpic": "Authentication System",
       "TcApp": "TMDay.API",
       "TcComponent": "Authentication",
-      "TcStory": "As a user, I want to login with my credentials",
+      "TcStory": "TDAY-3450",
       "TcAssigned": "John Lenon",
       "CreatedAt": "2026-03-31T00:00:00Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-22T03:25:00.855963Z",
       "TestScenarios": [
         {
           "Id": 1,
@@ -46,6 +46,18 @@
           "ActualResult": "Error message displayed: \u0027User not found\u0027",
           "Status": "Failed",
           "Type": "Functional"
+        },
+        {
+          "Id": 4,
+          "TcId": 1,
+          "Name": "riky dd",
+          "PreRequisites": "xcvb",
+          "Data": " sdfgh",
+          "Steps": "dfghnj",
+          "ExpectedResult": "sdfgh",
+          "ActualResult": "dfgh",
+          "Status": "Approved",
+          "Type": "Regression"
         }
       ]
     },
@@ -58,7 +70,7 @@
       "TcStory": "As a customer, I want to search for products by name and category",
       "TcAssigned": "Jane Smith",
       "CreatedAt": "2026-03-31T00:00:00Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-22T03:27:46.039302Z",
       "TestScenarios": [
         {
           "Id": 4,
@@ -89,11 +101,11 @@
           "TcId": 2,
           "Name": "Search with special characters",
           "PreRequisites": "Database connection is active",
-          "Data": "searchQuery: \u0027@#$%^\u0026*()\u0027",
+          "Data": "searchQuery: \u0027@#$%^\u0026*()\u0027/?",
           "Steps": "1. Open search bar\n2. Enter special characters\n3. Click search button",
           "ExpectedResult": "No results found or error message is displayed",
           "ActualResult": "No results found message displayed",
-          "Status": "Failed",
+          "Status": "Approved",
           "Type": "Functional"
         },
         {
@@ -119,7 +131,7 @@
       "TcStory": "As a customer, I want to complete my purchase with multiple payment options",
       "TcAssigned": "Michael Johnson",
       "CreatedAt": "2026-03-31T00:00:00Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-22T03:32:17.77508Z",
       "TestScenarios": [
         {
           "Id": 8,
@@ -142,7 +154,7 @@
           "Steps": "1. Proceed to checkout\n2. Select credit card payment\n3. Enter expired card details\n4. Click pay button",
           "ExpectedResult": "Payment declined with error message: \u0027Card has expired\u0027",
           "ActualResult": "Payment declined with error message: \u0027Card has expired\u0027",
-          "Status": "Failed",
+          "Status": "Approved",
           "Type": "Functional"
         },
         {
@@ -154,7 +166,7 @@
           "Steps": "1. Proceed to checkout\n2. Enter card with low balance\n3. Click pay button",
           "ExpectedResult": "Payment declined with error message: \u0027Insufficient funds\u0027",
           "ActualResult": "Payment declined with error message: \u0027Insufficient funds\u0027",
-          "Status": "Failed",
+          "Status": "Approved",
           "Type": "Functional"
         }
       ]
@@ -168,7 +180,7 @@
       "TcStory": "Log in using facebook account ",
       "TcAssigned": "Amalia Jonson",
       "CreatedAt": "2026-04-07T03:56:37.198582Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-22T03:33:17.257864Z",
       "TestScenarios": [
         {
           "Id": 1,
@@ -192,7 +204,7 @@
           "ExpectedResult": "The test scenarios is added successfully",
           "ActualResult": "?",
           "Status": "InProgress",
-          "Type": "Regression"
+          "Type": "Sanity"
         }
       ]
     },
@@ -205,7 +217,7 @@
       "TcStory": "As a user, I want to log in",
       "TcAssigned": "John Jackson",
       "CreatedAt": "2026-04-05T20:42:51.772069Z",
-      "UpdatedAt": null,
+      "UpdatedAt": "2026-04-21T23:37:56.747948Z",
       "TestScenarios": [
         {
           "Id": 1,
@@ -234,53 +246,65 @@
       ]
     },
     {
-      "TcId": 6,
-      "TcName": "Login Test",
-      "TcEpic": "User Authentication",
-      "TcApp": "WebApp",
-      "TcComponent": "Login Page",
-      "TcStory": "As a user, I want to log in",
-      "TcAssigned": "John Doe",
-      "CreatedAt": "2026-04-01T02:41:41.249875Z",
-      "UpdatedAt": null,
+      "TcId": 7,
+      "TcName": "ddd",
+      "TcEpic": "ddd",
+      "TcApp": "ddd",
+      "TcComponent": "dd",
+      "TcStory": "update",
+      "TcAssigned": "dd",
+      "CreatedAt": "2026-04-21T22:43:32.09241Z",
+      "UpdatedAt": "2026-04-22T03:21:57.787052Z",
       "TestScenarios": [
         {
           "Id": 1,
-          "TcId": 6,
-          "Name": "Valid Login",
-          "PreRequisites": "User account exists",
-          "Data": "username: user1, password: pass123",
-          "Steps": "1. Open login page. 2. Enter credentials. 3. Click login.",
-          "ExpectedResult": "User is redirected to the dashboard.",
-          "ActualResult": "NA",
-          "Status": "Canceled",
+          "TcId": 7,
+          "Name": "aaa",
+          "PreRequisites": "ss",
+          "Data": "ff",
+          "Steps": "ff",
+          "ExpectedResult": "ggg",
+          "ActualResult": "hhh",
+          "Status": "Failed",
           "Type": "Functional"
         },
         {
           "Id": 2,
-          "TcId": 6,
-          "Name": "Login iOS phone",
-          "PreRequisites": "Xcode installed",
-          "Data": "NA",
-          "Steps": "Access the login screens and validate UI elements and functionality.",
-          "ExpectedResult": "UI elements are displayed in accordance with the mockup design.",
-          "ActualResult": "NA",
+          "TcId": 7,
+          "Name": "bbb",
+          "PreRequisites": "bbb",
+          "Data": "bb",
+          "Steps": "bbb",
+          "ExpectedResult": "bbb",
+          "ActualResult": "bb",
           "Status": "ToDo",
           "Type": "Functional"
+        },
+        {
+          "Id": 4,
+          "TcId": 7,
+          "Name": "fff",
+          "PreRequisites": "fff",
+          "Data": "fff",
+          "Steps": "ff",
+          "ExpectedResult": "ff",
+          "ActualResult": "ff",
+          "Status": "Approved",
+          "Type": "Functional"
+        },
+        {
+          "Id": 5,
+          "TcId": 7,
+          "Name": "ddd",
+          "PreRequisites": "dd",
+          "Data": "dd",
+          "Steps": "dd",
+          "ExpectedResult": "dd",
+          "ActualResult": "dd",
+          "Status": "Approved",
+          "Type": "Smoke"
         }
       ]
-    },
-    {
-      "TcId": 7,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.088057Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
     },
     {
       "TcId": 8,
@@ -290,7 +314,7 @@
       "TcComponent": "New Component",
       "TcStory": "New Story",
       "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.120631Z",
+      "CreatedAt": "2026-04-24T02:26:20.723558Z",
       "UpdatedAt": null,
       "TestScenarios": []
     },
@@ -302,36 +326,48 @@
       "TcComponent": "New Component",
       "TcStory": "New Story",
       "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.124296Z",
+      "CreatedAt": "2026-04-24T02:26:20.751613Z",
       "UpdatedAt": null,
       "TestScenarios": []
     },
     {
       "TcId": 10,
-      "TcName": "Updated Test Case",
-      "TcEpic": "Updated Epic",
-      "TcApp": "Updated App",
-      "TcComponent": "Updated Component",
-      "TcStory": "Updated Story",
-      "TcAssigned": "Updated Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.135901Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 11,
       "TcName": "New Test Case",
       "TcEpic": "New Epic",
       "TcApp": "New App",
       "TcComponent": "New Component",
       "TcStory": "New Story",
       "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.138455Z",
+      "CreatedAt": "2026-04-24T02:26:20.75534Z",
       "UpdatedAt": null,
+      "TestScenarios": []
+    },
+    {
+      "TcId": 11,
+      "TcName": "Updated Test Case",
+      "TcEpic": "Updated Epic",
+      "TcApp": "Updated App",
+      "TcComponent": "Updated Component",
+      "TcStory": "Updated Story",
+      "TcAssigned": "Updated Assigned",
+      "CreatedAt": "2026-04-24T02:26:20.764598Z",
+      "UpdatedAt": "2026-04-24T02:26:20.766433Z",
+      "TestScenarios": []
+    },
+    {
+      "TcId": 12,
+      "TcName": "New Test Case",
+      "TcEpic": "New Epic",
+      "TcApp": "New App",
+      "TcComponent": "New Component",
+      "TcStory": "New Story",
+      "TcAssigned": "New Assigned",
+      "CreatedAt": "2026-04-24T02:26:20.76916Z",
+      "UpdatedAt": "2026-04-24T02:26:20.772349Z",
       "TestScenarios": [
         {
           "Id": 1,
-          "TcId": 11,
+          "TcId": 12,
           "Name": "updatedScenario",
           "PreRequisites": "updatedScenario.PreRequisites",
           "Data": "updatedScenario.Data",
@@ -344,18 +380,6 @@
       ]
     },
     {
-      "TcId": 12,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.144594Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
       "TcId": 13,
       "TcName": "New Test Case",
       "TcEpic": "New Epic",
@@ -363,12 +387,24 @@
       "TcComponent": "New Component",
       "TcStory": "New Story",
       "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.148453Z",
+      "CreatedAt": "2026-04-24T02:26:20.774587Z",
       "UpdatedAt": null,
+      "TestScenarios": []
+    },
+    {
+      "TcId": 14,
+      "TcName": "New Test Case",
+      "TcEpic": "New Epic",
+      "TcApp": "New App",
+      "TcComponent": "New Component",
+      "TcStory": "New Story",
+      "TcAssigned": "New Assigned",
+      "CreatedAt": "2026-04-24T02:26:20.778048Z",
+      "UpdatedAt": "2026-04-24T02:26:20.790948Z",
       "TestScenarios": [
         {
           "Id": 1,
-          "TcId": 13,
+          "TcId": 14,
           "Name": "updatedScenario",
           "PreRequisites": "updatedScenario.PreRequisites",
           "Data": "updatedScenario.Data",
@@ -381,18 +417,6 @@
       ]
     },
     {
-      "TcId": 14,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.161685Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
       "TcId": 15,
       "TcName": "New Test Case",
       "TcEpic": "New Epic",
@@ -400,7 +424,7 @@
       "TcComponent": "New Component",
       "TcStory": "New Story",
       "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T00:32:53.172538Z",
+      "CreatedAt": "2026-04-24T02:26:20.794144Z",
       "UpdatedAt": null,
       "TestScenarios": []
     },
@@ -412,264 +436,8 @@
       "TcComponent": "New Component",
       "TcStory": "New Story",
       "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.480157Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 17,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.509707Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 18,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.512654Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 19,
-      "TcName": "Updated Test Case",
-      "TcEpic": "Updated Epic",
-      "TcApp": "Updated App",
-      "TcComponent": "Updated Component",
-      "TcStory": "Updated Story",
-      "TcAssigned": "Updated Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.522472Z",
-      "UpdatedAt": "2026-04-09T01:35:07.524151Z",
-      "TestScenarios": []
-    },
-    {
-      "TcId": 20,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.526561Z",
-      "UpdatedAt": null,
-      "TestScenarios": [
-        {
-          "Id": 1,
-          "TcId": 20,
-          "Name": "updatedScenario",
-          "PreRequisites": "updatedScenario.PreRequisites",
-          "Data": "updatedScenario.Data",
-          "Steps": "updatedScenario.Steps",
-          "ExpectedResult": "updatedScenario.ExpectedResult",
-          "ActualResult": "updatedScenario.ActualResult",
-          "Status": "ToDo",
-          "Type": "Functional"
-        }
-      ]
-    },
-    {
-      "TcId": 21,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.531722Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 22,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.542524Z",
-      "UpdatedAt": null,
-      "TestScenarios": [
-        {
-          "Id": 1,
-          "TcId": 22,
-          "Name": "updatedScenario",
-          "PreRequisites": "updatedScenario.PreRequisites",
-          "Data": "updatedScenario.Data",
-          "Steps": "updatedScenario.Steps",
-          "ExpectedResult": "updatedScenario.ExpectedResult",
-          "ActualResult": "updatedScenario.ActualResult",
-          "Status": "InProgress",
-          "Type": "Regression"
-        }
-      ]
-    },
-    {
-      "TcId": 23,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.547617Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 24,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:35:07.555306Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 25,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.752532Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 26,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.78126Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 27,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.784282Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 28,
-      "TcName": "Updated Test Case",
-      "TcEpic": "Updated Epic",
-      "TcApp": "Updated App",
-      "TcComponent": "Updated Component",
-      "TcStory": "Updated Story",
-      "TcAssigned": "Updated Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.794147Z",
-      "UpdatedAt": "2026-04-09T01:45:34.796115Z",
-      "TestScenarios": []
-    },
-    {
-      "TcId": 29,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.798387Z",
-      "UpdatedAt": null,
-      "TestScenarios": [
-        {
-          "Id": 1,
-          "TcId": 29,
-          "Name": "updatedScenario",
-          "PreRequisites": "updatedScenario.PreRequisites",
-          "Data": "updatedScenario.Data",
-          "Steps": "updatedScenario.Steps",
-          "ExpectedResult": "updatedScenario.ExpectedResult",
-          "ActualResult": "updatedScenario.ActualResult",
-          "Status": "ToDo",
-          "Type": "Functional"
-        }
-      ]
-    },
-    {
-      "TcId": 30,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.811611Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 31,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.814532Z",
-      "UpdatedAt": null,
-      "TestScenarios": [
-        {
-          "Id": 1,
-          "TcId": 31,
-          "Name": "updatedScenario",
-          "PreRequisites": "updatedScenario.PreRequisites",
-          "Data": "updatedScenario.Data",
-          "Steps": "updatedScenario.Steps",
-          "ExpectedResult": "updatedScenario.ExpectedResult",
-          "ActualResult": "updatedScenario.ActualResult",
-          "Status": "InProgress",
-          "Type": "Regression"
-        }
-      ]
-    },
-    {
-      "TcId": 32,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.818855Z",
-      "UpdatedAt": null,
-      "TestScenarios": []
-    },
-    {
-      "TcId": 33,
-      "TcName": "New Test Case",
-      "TcEpic": "New Epic",
-      "TcApp": "New App",
-      "TcComponent": "New Component",
-      "TcStory": "New Story",
-      "TcAssigned": "New Assigned",
-      "CreatedAt": "2026-04-09T01:45:34.82698Z",
-      "UpdatedAt": null,
+      "CreatedAt": "2026-04-24T02:26:20.80402Z",
+      "UpdatedAt": "2026-04-24T02:26:20.807203Z",
       "TestScenarios": []
     }
   ]

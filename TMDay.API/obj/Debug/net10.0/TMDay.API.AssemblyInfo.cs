@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TMDay.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ba2b89a399f44c6085496def36c6a807e08c3c85")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cd16abe0bee490eae3266b67a670bd3c3127d774")]
 [assembly: System.Reflection.AssemblyProductAttribute("TMDay.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TMDay.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

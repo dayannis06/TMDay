@@ -103,6 +103,8 @@ namespace TMDay.API.Controllers
             scenario.Status = updatedScenario.Status;
             scenario.Type = updatedScenario.Type;
 
+            testCase.UpdatedAt = DateTime.UtcNow;
+
             SaveTestCasesToFile();
 
             return NoContent();
@@ -140,6 +142,8 @@ namespace TMDay.API.Controllers
             newScenario.TcId = id;
             testCase.TestScenarios.Add(newScenario);
 
+            testCase.UpdatedAt = DateTime.UtcNow;
+
             SaveTestCasesToFile();
 
             return CreatedAtAction(nameof(GetTestCaseById), new { id = testCase.TcId }, newScenario);
@@ -175,6 +179,8 @@ namespace TMDay.API.Controllers
                 return NotFound();
             }
             testCase.TestScenarios.Remove(scenario);
+
+            testCase.UpdatedAt = DateTime.UtcNow;
 
             SaveTestCasesToFile();
 

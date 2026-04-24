@@ -11,6 +11,7 @@
   --success-bg: #dcfce7;
   --danger: #dc2626;
   --danger-bg: #fee2e2;
+  --warning: #d97706;
   --surface: #ffffff;
   --social-bg: #eff6ff;
   --shadow:
@@ -50,6 +51,7 @@
     --success-bg: rgba(34, 197, 94, 0.2);
     --danger: #f87171;
     --danger-bg: rgba(239, 68, 68, 0.22);
+    --warning: #fbbf24;
     --surface: #111827;
     --social-bg: rgba(59, 130, 246, 0.16);
     --shadow:

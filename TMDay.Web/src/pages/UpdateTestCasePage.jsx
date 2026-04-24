@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   getTestCaseById,
   getEnums,
+  getTestCaseProgress,
   updateTestCase,
   deleteTestCase,
   createTestScenario,
@@ -33,6 +34,7 @@ const mapScenarioToForm = (selectedScenario, statuses, types) => ({
 
 export default function TestCasePage({ testCaseId, onGoHome }) {
   const [form, setForm] = useState(null)
+  const [progress, setProgress] = useState([])
   const [statusOptions, setStatusOptions] = useState([])
   const [typeOptions, setTypeOptions] = useState([])
   const [loading, setLoading] = useState(false)
@@ -44,7 +46,8 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
   const [showScenarioForm, setShowScenarioForm] = useState(false)
   const [selectedScenarioId, setSelectedScenarioId] = useState(null)
   const [scenarioEdit, setScenarioEdit] = useState(emptyScenarioForm)
-  const [message, setMessage] = useState('')
+  const [toasts, setToasts] = useState([])
+  const toastIdRef = useRef(0)
   const [error, setError] = useState('')
   const [scenario, setScenario] = useState({
     name: '',
@@ -57,17 +60,32 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
     type: '',
   })
 
+  const dismissToast = useCallback((id) => {
+    setToasts((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, exiting: true } : t)),
+    )
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id))
+    }, 250)
+  }, [])
+
+  const addToast = useCallback((message, type) => {
+    const id = ++toastIdRef.current
+    setToasts((prev) => [...prev, { id, message, type, exiting: false }])
+    setTimeout(() => dismissToast(id), 5000)
+  }, [dismissToast])
+
   useEffect(() => {
     if (!testCaseId) return
 
     setForm(null)
-    setMessage('')
     setError('')
     setLoading(true)
 
-    Promise.all([getTestCaseById(testCaseId), getEnums()])
-      .then(([tc, enums]) => {
+    Promise.all([getTestCaseById(testCaseId), getEnums(), getTestCaseProgress(testCaseId)])
+      .then(([tc, enums, prog]) => {
         setForm(tc)
+        setProgress(Array.isArray(prog) ? prog : [])
         const statuses = Array.isArray(enums?.testScenarioStatuses) ? enums.testScenarioStatuses : []
         const types = Array.isArray(enums?.testScenarioTypes) ? enums.testScenarioTypes : []
         setStatusOptions(statuses)
@@ -80,20 +98,14 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
       .finally(() => setLoading(false))
   }, [testCaseId])
 
-  const resetMessages = () => {
-    setMessage('')
-    setError('')
-  }
-
   const handleSaveGeneral = async (event) => {
     event.preventDefault()
-    resetMessages()
     setSaving(true)
     try {
       await updateTestCase(testCaseId, form)
-      setMessage('General information saved.')
+      addToast('General information saved.', 'success')
     } catch (err) {
-      setError(`Unable to save: ${err.message}`)
+      addToast(`Unable to save: ${err.message}`, 'error')
     } finally {
       setSaving(false)
     }
@@ -101,7 +113,6 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
 
   const handleAddScenario = async (event) => {
     event.preventDefault()
-    resetMessages()
 
     const requiredFields = [
       scenario.name,
@@ -113,16 +124,17 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
     ]
 
     if (requiredFields.some((f) => !f.trim())) {
-      setError('Please complete all scenario fields.')
+      addToast('Please complete all scenario fields.', 'error')
       return
     }
 
     setAddingScenario(true)
     try {
       await createTestScenario(testCaseId, scenario)
-      const updated = await getTestCaseById(testCaseId)
+      const [updated, prog] = await Promise.all([getTestCaseById(testCaseId), getTestCaseProgress(testCaseId)])
       setForm(updated)
-      setMessage('Scenario added.')
+      setProgress(Array.isArray(prog) ? prog : [])
+      addToast('Scenario added.', 'success')
       setScenario({
         name: '',
         preRequisites: '',
@@ -135,15 +147,13 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
       })
       setShowScenarioForm(false)
     } catch (err) {
-      setError(`Unable to add scenario: ${err.message}`)
+      addToast(`Unable to add scenario: ${err.message}`, 'error')
     } finally {
       setAddingScenario(false)
     }
   }
 
   const handleDeleteTestCase = async () => {
-    resetMessages()
-
     const shouldDelete = window.confirm('Are you sure you want to delete this test case?')
     if (!shouldDelete) {
       return
@@ -154,14 +164,13 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
       await deleteTestCase(testCaseId)
       onGoHome()
     } catch (err) {
-      setError(`Unable to delete test case: ${err.message}`)
+      addToast(`Unable to delete test case: ${err.message}`, 'error')
     } finally {
       setDeletingTestCase(false)
     }
   }
 
   const handleSelectScenario = (selectedScenario) => {
-    resetMessages()
     setSelectedScenarioId(selectedScenario.id)
     setScenarioEdit(mapScenarioToForm(selectedScenario, statusOptions, typeOptions))
     setShowScenarioForm(false)
@@ -170,8 +179,6 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
   const handleSaveScenarioEdit = async (event) => {
     event.preventDefault()
     if (!selectedScenarioId) return
-
-    resetMessages()
 
     const requiredFields = [
       scenarioEdit.name,
@@ -183,20 +190,21 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
     ]
 
     if (requiredFields.some((field) => !field.trim())) {
-      setError('Please complete all scenario fields.')
+      addToast('Please complete all scenario fields.', 'error')
       return
     }
 
     setEditingScenario(true)
     try {
       await updateTestScenario(testCaseId, selectedScenarioId, scenarioEdit)
-      const updated = await getTestCaseById(testCaseId)
+      const [updated, prog] = await Promise.all([getTestCaseById(testCaseId), getTestCaseProgress(testCaseId)])
       setForm(updated)
-      setMessage('Scenario updated.')
+      setProgress(Array.isArray(prog) ? prog : [])
+      addToast('Scenario updated.', 'success')
       setSelectedScenarioId(null)
       setScenarioEdit(emptyScenarioForm)
     } catch (err) {
-      setError(`Unable to update scenario: ${err.message}`)
+      addToast(`Unable to update scenario: ${err.message}`, 'error')
     } finally {
       setEditingScenario(false)
     }
@@ -209,7 +217,6 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
 
   const handleDeleteScenario = async (event, scenarioId) => {
     event.stopPropagation()
-    resetMessages()
 
     const shouldDelete = window.confirm('Are you sure you want to delete this scenario?')
     if (!shouldDelete) {
@@ -219,17 +226,18 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
     setDeletingScenarioId(scenarioId)
     try {
       await deleteTestScenario(testCaseId, scenarioId)
-      const updated = await getTestCaseById(testCaseId)
+      const [updated, prog] = await Promise.all([getTestCaseById(testCaseId), getTestCaseProgress(testCaseId)])
       setForm(updated)
+      setProgress(Array.isArray(prog) ? prog : [])
 
       if (selectedScenarioId === scenarioId) {
         setSelectedScenarioId(null)
         setScenarioEdit(emptyScenarioForm)
       }
 
-      setMessage('Scenario deleted.')
+      addToast('Scenario deleted.', 'success')
     } catch (err) {
-      setError(`Unable to delete scenario: ${err.message}`)
+      addToast(`Unable to delete scenario: ${err.message}`, 'error')
     } finally {
       setDeletingScenarioId(null)
     }
@@ -243,7 +251,13 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
         {!loading && form && (
           <>
             <section className="form-section" aria-label="General information">
-              <h2>Test Case #{testCaseId}</h2>
+              <div className="section-header-row">
+                <h2>Test Case #{testCaseId}</h2>
+                <div className="metadata-row">
+                  <span className="metadata-item">Created: {form.createdAt ? new Date(form.createdAt).toLocaleString() : '-'}</span>
+                  <span className="metadata-item">Updated: {form.updatedAt ? new Date(form.updatedAt).toLocaleString() : '-'}</span>
+                </div>
+              </div>
               <h3 className="section-subtitle">General Information</h3>
               <form className="form-grid" onSubmit={handleSaveGeneral}>
                 <label>
@@ -280,7 +294,8 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
                 </label>
                 <label>
                   Story
-                  <textarea
+                  <input
+                    type="text"
                     value={form.tcStory || ''}
                     onChange={(e) => setForm({ ...form, tcStory: e.target.value })}
                   />
@@ -324,6 +339,15 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
                   {showScenarioForm ? 'Cancel' : 'New Scenario'}
                 </button>
               </div>
+              {progress.length > 0 && (
+                <div className="progress-badges" style={{ marginTop: '8px', flexWrap: 'wrap' }}>
+                  {progress.map((item) => (
+                    <span key={item.state} className={`progress-badge progress-badge--${item.state.toLowerCase()}`}>
+                      {item.state} {item.count} ({item.percentage}%)
+                    </span>
+                  ))}
+                </div>
+              )}
               {(form.testScenarios || []).length === 0 ? (
                 <p className="status">No scenarios yet.</p>
               ) : (
@@ -348,16 +372,27 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
                           <td>{s.status}</td>
                           <td>{s.type}</td>
                           <td>
-                            <button
-                              type="button"
-                              className="icon-action-btn danger"
-                              aria-label={`Delete scenario ${s.name}`}
-                              title="Delete scenario"
-                              onClick={(event) => handleDeleteScenario(event, s.id)}
-                              disabled={deletingScenarioId === s.id}
-                            >
-                              {deletingScenarioId === s.id ? '…' : '✖'}
-                            </button>
+                            <div className="action-group">
+                              <button
+                                type="button"
+                                className="icon-action-btn accent"
+                                aria-label={`Open scenario ${s.name}`}
+                                title="Open scenario"
+                                onClick={(event) => { event.stopPropagation(); handleSelectScenario(s) }}
+                              >
+                                ▶
+                              </button>
+                              <button
+                                type="button"
+                                className="icon-action-btn danger"
+                                aria-label={`Delete scenario ${s.name}`}
+                                title="Delete scenario"
+                                onClick={(event) => handleDeleteScenario(event, s.id)}
+                                disabled={deletingScenarioId === s.id}
+                              >
+                                {deletingScenarioId === s.id ? '…' : '✖'}
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))}
@@ -524,7 +559,7 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
                 </label>
                 <div className="form-actions">
                   <button type="submit" disabled={addingScenario}>
-                    <span className="button-icon" aria-hidden="true">🧩</span>
+                    <span className="button-icon" aria-hidden="true">➕</span>
                     {addingScenario ? 'Adding...' : 'Add Scenario'}
                   </button>
                 </div>
@@ -534,8 +569,25 @@ export default function TestCasePage({ testCaseId, onGoHome }) {
           </>
         )}
 
-        {message && <p className="status status-success">{message}</p>}
-        {error && form && <p className="status status-error">{error}</p>}
+        {toasts.length > 0 && (
+          <div className="toast-container">
+            {toasts.map((toast) => (
+              <div
+                key={toast.id}
+                className={`toast toast-${toast.type}${toast.exiting ? ' toast-exit' : ''}`}
+              >
+                <span className="toast-message">{toast.message}</span>
+                <button
+                  className="toast-close"
+                  onClick={() => dismissToast(toast.id)}
+                  aria-label="Close notification"
+                >
+                  ✕
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
     </>
   )
 }

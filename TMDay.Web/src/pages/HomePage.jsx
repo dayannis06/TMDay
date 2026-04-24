@@ -93,6 +93,7 @@ function HomePage({ onSelectTestCase }) {
                 <th>App</th>
                 <th>Assigned</th>
                 <th>Created</th>
+                <th>Updated</th>
                 <th>Progress</th>
               </tr>
             </thead>
@@ -108,6 +109,7 @@ function HomePage({ onSelectTestCase }) {
                   <td>{testCase.tcApp || '-'}</td>
                   <td>{testCase.tcAssigned || '-'}</td>
                   <td>{formatDate(testCase.createdAt)}</td>
+                  <td>{formatDate(testCase.updatedAt)}</td>
                   <td>
                     <div className="progress-badges">
                       {(progressMap[testCase.tcId] ?? []).map((item) => (

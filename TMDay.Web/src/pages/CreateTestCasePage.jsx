@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   createTestCase,
   createTestScenario,
@@ -8,8 +8,8 @@ import {
 function CreateTestCasePage({ onGoHome }) {
   const [statusOptions, setStatusOptions] = useState([])
   const [typeOptions, setTypeOptions] = useState([])
-  const [formMessage, setFormMessage] = useState('')
-  const [formError, setFormError] = useState('')
+  const [toasts, setToasts] = useState([])
+  const toastIdRef = useRef(0)
   const [creatingTestCase, setCreatingTestCase] = useState(false)
   const [creatingScenario, setCreatingScenario] = useState(false)
   const [createdTestCaseId, setCreatedTestCaseId] = useState(null)
@@ -32,10 +32,23 @@ function CreateTestCasePage({ onGoHome }) {
     type: '',
   })
 
+  const dismissToast = useCallback((id) => {
+    setToasts((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, exiting: true } : t)),
+    )
+    setTimeout(() => {
+      setToasts((prev) => prev.filter((t) => t.id !== id))
+    }, 250)
+  }, [])
+
+  const addToast = useCallback((message, type) => {
+    const id = ++toastIdRef.current
+    setToasts((prev) => [...prev, { id, message, type, exiting: false }])
+    setTimeout(() => dismissToast(id), 5000)
+  }, [dismissToast])
+
   useEffect(() => {
     const fetchEnums = async () => {
-      setFormError('')
-
       try {
         const result = await getEnums()
         const fetchedStatuses = Array.isArray(result?.testScenarioStatuses)
@@ -55,12 +68,12 @@ function CreateTestCasePage({ onGoHome }) {
       } catch (requestError) {
         setStatusOptions([])
         setTypeOptions([])
-        setFormError(`Unable to load enums: ${requestError.message}`)
+        addToast(`Unable to load enums: ${requestError.message}`, 'error')
       }
     }
 
     fetchEnums()
-  }, [])
+  }, [addToast])
 
   const handleTestCaseFieldChange = (field, value) => {
     setNewTestCase((prev) => ({
@@ -76,14 +89,8 @@ function CreateTestCasePage({ onGoHome }) {
     }))
   }
 
-  const resetMessages = () => {
-    setFormError('')
-    setFormMessage('')
-  }
-
   const handleCreateTestCase = async (event) => {
     event.preventDefault()
-    resetMessages()
 
     const requiredFields = [
       newTestCase.tcName,
@@ -95,7 +102,7 @@ function CreateTestCasePage({ onGoHome }) {
     ]
 
     if (requiredFields.some((field) => !field.trim())) {
-      setFormError('Please complete all test case fields.')
+      addToast('Please complete all test case fields.', 'error')
       return
     }
 
@@ -113,11 +120,12 @@ function CreateTestCasePage({ onGoHome }) {
       }
 
       setCreatedTestCaseId(newId)
-      setFormMessage(
+      addToast(
         `Test case #${newId} created. You can now add scenarios below.`,
+        'success',
       )
     } catch (requestError) {
-      setFormError(`Unable to create test case: ${requestError.message}`)
+      addToast(`Unable to create test case: ${requestError.message}`, 'error')
     } finally {
       setCreatingTestCase(false)
     }
@@ -125,10 +133,9 @@ function CreateTestCasePage({ onGoHome }) {
 
   const handleCreateScenario = async (event) => {
     event.preventDefault()
-    resetMessages()
 
     if (!createdTestCaseId) {
-      setFormError('Create a test case first before adding a scenario.')
+      addToast('Create a test case first before adding a scenario.', 'error')
       return
     }
 
@@ -144,7 +151,7 @@ function CreateTestCasePage({ onGoHome }) {
     ]
 
     if (requiredFields.some((field) => !String(field).trim())) {
-      setFormError('Please complete all scenario fields.')
+      addToast('Please complete all scenario fields.', 'error')
       return
     }
 
@@ -152,7 +159,7 @@ function CreateTestCasePage({ onGoHome }) {
 
     try {
       await createTestScenario(createdTestCaseId, newScenario)
-      setFormMessage(`Scenario created for test case #${createdTestCaseId}.`)
+      addToast(`Scenario created for test case #${createdTestCaseId}.`, 'success')
       setNewScenario({
         name: '',
         preRequisites: '',
@@ -164,7 +171,7 @@ function CreateTestCasePage({ onGoHome }) {
         type: typeOptions[0] ?? '',
       })
     } catch (requestError) {
-      setFormError(`Unable to create scenario: ${requestError.message}`)
+      addToast(`Unable to create scenario: ${requestError.message}`, 'error')
     } finally {
       setCreatingScenario(false)
     }
@@ -217,7 +224,8 @@ function CreateTestCasePage({ onGoHome }) {
           </label>
           <label>
             Story
-            <textarea
+            <input
+              type="text"
               value={newTestCase.tcStory}
               onChange={(event) =>
                 handleTestCaseFieldChange('tcStory', event.target.value)
@@ -342,7 +350,7 @@ function CreateTestCasePage({ onGoHome }) {
             </label>
             <div className="form-actions">
               <button type="submit" disabled={creatingScenario}>
-                <span className="button-icon" aria-hidden="true">🧩</span>
+                <span className="button-icon" aria-hidden="true">➕</span>
                 {creatingScenario ? 'Creating...' : 'Add Scenario'}
               </button>
             </div>
@@ -350,8 +358,25 @@ function CreateTestCasePage({ onGoHome }) {
         </section>
       )}
 
-      {formMessage && <p className="status status-success">{formMessage}</p>}
-      {formError && <p className="status status-error">{formError}</p>}
+      {toasts.length > 0 && (
+        <div className="toast-container">
+          {toasts.map((toast) => (
+            <div
+              key={toast.id}
+              className={`toast toast-${toast.type}${toast.exiting ? ' toast-exit' : ''}`}
+            >
+              <span className="toast-message">{toast.message}</span>
+              <button
+                className="toast-close"
+                onClick={() => dismissToast(toast.id)}
+                aria-label="Close notification"
+              >
+                ✕
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </>
   )
 }
